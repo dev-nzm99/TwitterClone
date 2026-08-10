@@ -3,19 +3,15 @@ using System.Runtime.InteropServices;
 
 namespace TwitterClone.Domain.Entities
 {
-    public class Bookmark
+    public class Bookmark : BaseEntity
     {
-        private Guid _id { get; }
         private Guid _userId { get; }
         private Guid _tweetId { get; }
-        private DateTime _createdAt { get; }
-        
-        public Bookmark( Guid userId, Guid tweetId)
+
+        public Bookmark(Guid userId, Guid tweetId):base(Guid.NewGuid())
         {
-            _id = Guid.NewGuid();
             _userId = userId;
             _tweetId = tweetId;
-            _createdAt = DateTime.Now;
         }
     }
 }

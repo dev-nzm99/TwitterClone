@@ -1,20 +1,20 @@
-﻿namespace TwitterClone.Domain.Entities
+﻿using System.Runtime.InteropServices;
+
+namespace TwitterClone.Domain.Entities
 {
-    public class Massage
+    public class Massage : BaseEntity
     {
         private Guid _senderId { get; }
         private Guid _receiverId { get; }
         private string _content { get; }
-        private DateTime _sendAt;
-        private bool _isRead;
+        private bool _isRead { get; }
 
-        public Massage(Guid senderId, Guid receiverId, string content, DateTime sendAt)
+        public Massage(Guid senderId, Guid receiverId, string content):base(Guid.NewGuid())
         {
-            _senderId = senderId;
-            _receiverId = receiverId;
-            _content = content;
-            _sendAt = DateTime.Now;
-            _isRead = false;
+            this._senderId = senderId;
+            this._receiverId = receiverId;
+            this._content = content;
+            this._isRead = false;
         }
     }
 }

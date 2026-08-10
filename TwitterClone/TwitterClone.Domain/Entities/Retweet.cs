@@ -3,21 +3,23 @@ using System.Data;
 
 namespace TwitterClone.Domain.Entities
 {
-    public class Retweet
+    public class Retweet: BaseEntity
     {
-        private Guid _userId;
-        private Guid _tweetId;
-        private DateTime _retweetAt;
+        private Guid _userId { get; set; }
+        private Guid _tweetId { get; set; }
+        private string _comment { get; set; }
 
-        public Retweet(Guid userId, Guid tweetId)
+        //Comment Optional
+        public Retweet(Guid userId, Guid tweetId, string? comment = null):base(Guid.NewGuid())
         {
-            _userId = userId;
-            _tweetId = tweetId;
-            _retweetAt = DateTime.Now;
+            this._userId = userId;
+            this._tweetId = tweetId;
+            this._comment = comment;
         }
 
-        public Guid UserId { get { return _userId; } }
-        public Guid TweetsId { get { return _tweetId; } }
-        public DateTime DateTime { get { return _retweetAt; } }
+        //public Retweet(Guid userId, Guid tweetId, string comment) : this(userId, tweetId)
+        //{
+        //    _comment = comment;
+        //}
     }
 }
