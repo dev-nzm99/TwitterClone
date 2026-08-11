@@ -3,13 +3,13 @@ namespace TwitterClone.Domain.Entities
 {
     public class Like : BaseEntity
     {
-        private Guid _userId { get; set; }
-        private Guid _tweetId { get; set; }
+        public Guid UserId { get; set; }
+        public Guid TweetId { get; set; }
 
         public Like(Guid userId, Guid tweetId):base(Guid.NewGuid())
         {
-            _userId = userId;
-            _tweetId = tweetId;
+            UserId = userId;
+            TweetId = tweetId;
         }
     }
 }

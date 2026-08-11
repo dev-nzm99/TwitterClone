@@ -4,17 +4,17 @@ namespace TwitterClone.Domain.Entities
 {
     public class Massage : BaseEntity
     {
-        private Guid _senderId { get; }
-        private Guid _receiverId { get; }
-        private string _content { get; }
-        private bool _isRead { get; }
+        public Guid SenderId { get; private set; }
+        public Guid ReceiverId { get; private set; }
+        public string Content { get; private set; }
+        public bool IsRead { get; private set; }
 
         public Massage(Guid senderId, Guid receiverId, string content):base(Guid.NewGuid())
         {
-            this._senderId = senderId;
-            this._receiverId = receiverId;
-            this._content = content;
-            this._isRead = false;
+            SenderId = senderId;
+            ReceiverId = receiverId;
+            Content = content;
+            IsRead = false;
         }
     }
 }
