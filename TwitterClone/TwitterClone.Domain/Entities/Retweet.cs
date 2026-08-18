@@ -7,7 +7,7 @@ namespace TwitterClone.Domain.Entities
     {
         public Guid UserId { get; set; }
         public Guid TweetId { get; set; }
-        public string Comment { get; set; }
+        public string? Comment { get; set; }
 
         public Retweet(Guid userId, Guid tweetId):base(Guid.NewGuid())
         {
