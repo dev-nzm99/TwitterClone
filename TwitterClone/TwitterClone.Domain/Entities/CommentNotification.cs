@@ -13,5 +13,9 @@ namespace TwitterClone.Domain.Entities
         {
             Message = message;
         }
+        public override string GetMessage()
+        {
+            return $"User with id {CommentByUserId} comment on your post.";
+        }
     }
 }

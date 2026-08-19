@@ -1,5 +1,4 @@
 ﻿
-
 namespace TwitterClone.Domain.Entities
 {
     public sealed class SystemNotification: Notification
@@ -8,6 +7,10 @@ namespace TwitterClone.Domain.Entities
         public void AddMessage(string message)
         {
             Message = message;
+        }
+        public override string GetMessage()
+        {
+            return $"System notification: {Message}.";
         }
     }
 }
