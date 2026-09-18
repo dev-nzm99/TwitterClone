@@ -9,12 +9,14 @@ namespace TwitterClone.Domain.Entities
         public string Content { get; private set; }
         public bool IsRead { get; private set; }
 
-        public Massage(Guid senderId, Guid receiverId, string content):base(Guid.NewGuid())
+        public Massage():base(Guid.NewGuid())
         {
-            SenderId = senderId;
-            ReceiverId = receiverId;
-            Content = content;
-            IsRead = false;
+
+        }
+        public override string DescribeRecord()
+        {
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, SenderId: {SenderId}, ReceiverId: {ReceiverId}, Content: {Content}, SentAt: {SentAt}, IsRead: {IsRead}";
         }
     }
 }

@@ -8,10 +8,15 @@ namespace TwitterClone.Domain.Entities
         protected string? Message { get; set; }
         public bool IsRead { get; set; }
 
-        public Notification(string type) : base(Guid.NewGuid())
+        public Notification(string notificationType) : base(Guid.NewGuid())
         {
-            Type = type;
+            Type = notificationType;
         }
         public abstract string GetMessage();
+
+        public string GetNotificationInfo()
+        {
+            return $"UserId: {UserId}, NotificationType: {Type}";
+        }
     }
 }

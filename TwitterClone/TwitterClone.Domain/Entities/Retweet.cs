@@ -9,15 +9,15 @@ namespace TwitterClone.Domain.Entities
         public Guid TweetId { get; set; }
         public string? Comment { get; set; }
 
-        public Retweet(Guid userId, Guid tweetId):base(Guid.NewGuid())
+        public Retweet():base(Guid.NewGuid())
         {
-            UserId = userId;
-            TweetId = tweetId;
+
         }
 
-        public Retweet(Guid userId, Guid tweetId, string comment) : this(userId, tweetId)
+        public override string DescribeRecord()
         {
-            Comment = comment;
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, UserId: {UserId}, TweetId: {TweetId}, Comment: {Comment}";
         }
     }
 }

@@ -12,5 +12,11 @@ namespace TwitterClone.Domain.Entities
         {
             return $"User with id {MentionedByUserId} mentioned you in post.";
         }
+
+        public override string DescribeRecord()
+        {
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, MentionedByUserId: {MentionedByUserId}";
+        }
     }
 }
