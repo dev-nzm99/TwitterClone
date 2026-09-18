@@ -8,9 +8,15 @@ namespace TwitterClone.Domain.Entities
         {
             Message = message;
         }
+
         public override string GetMessage()
         {
             return $"System notification: {Message}.";
+        }
+
+        public override string DescribeRecord()
+        {
+            return base.DescribeRecord();
         }
     }
 }

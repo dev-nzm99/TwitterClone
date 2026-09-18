@@ -9,6 +9,12 @@ namespace TwitterClone.Domain.Entities
            CommentByUserId = commentByUserId;
         }
 
+        public override string DescribeRecord()
+        {
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, CommentByUserId: {CommentByUserId}";
+        }
+
         public void AddMessage(string message)
         {
             Message = message;

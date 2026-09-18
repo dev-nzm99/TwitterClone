@@ -6,14 +6,13 @@ namespace TwitterClone.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; private set; }
+        
         private List<Guid> _followers = new List<Guid>();
         private List<Guid> _incomingNotifications = new List<Guid>();
 
-        public User(string firstName, string lastName, string email) : base(Guid.NewGuid())
+        public User() : base(Guid.NewGuid())
         {
-            FirstName = firstName;
-            LastName = lastName;
-            Email = email;
+
         }
 
         public void Follow(Guid id)
@@ -37,6 +36,12 @@ namespace TwitterClone.Domain.Entities
             {
                 _incomingNotifications.Add(notificationId);
             }
+        }
+
+        public override string DescribeRecord()
+        {
+            var baseRecord = base.DescribeRecord();
+            return $"{baseRecord}, FirstName: {FirstName}, LastName: {LastName}, Email: {Email}";
         }
     }
 }
