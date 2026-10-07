@@ -37,7 +37,7 @@ namespace TwitterClone.Api.Controllers
         }
 
 
-        [HttpGet]
+        [HttpGet("{id}")]
         public IActionResult GetMessageById([FromRoute] Guid id)
         {
             return Ok(new
