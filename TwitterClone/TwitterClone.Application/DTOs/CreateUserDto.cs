@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace TwitterClone.Api.DTOs
+namespace TwitterClone.Application.DTOs
 {
     public class CreateUserDto
     {
