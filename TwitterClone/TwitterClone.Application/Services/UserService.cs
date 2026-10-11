@@ -17,7 +17,8 @@ namespace TwitterClone.Application.Services
         {
             if (string.IsNullOrWhiteSpace(createUserDto.Firstname) ||
                string.IsNullOrWhiteSpace(createUserDto.Lastname) ||
-               string.IsNullOrWhiteSpace(createUserDto.Email)
+               string.IsNullOrWhiteSpace(createUserDto.Email) ||
+               string.IsNullOrWhiteSpace(createUserDto.PhoneNumber)
               )
             {
                 return null;
@@ -35,6 +36,7 @@ namespace TwitterClone.Application.Services
                 FirstName = createUserDto.Firstname,
                 LastName = createUserDto.Lastname,
                 Email = createUserDto.Email,
+                PhoneNumber = createUserDto.PhoneNumber
             });
 
             return new UserDto
@@ -43,6 +45,7 @@ namespace TwitterClone.Application.Services
                 Firstname = createdUser.FirstName,
                 Lastname = createdUser.LastName,
                 Email = createdUser.Email,
+                PhoneNumber = createdUser.PhoneNumber,
             };
         }
 
@@ -69,12 +72,23 @@ namespace TwitterClone.Application.Services
                 Firstname = user.FirstName,
                 Lastname = user.LastName,
                 Email = user.Email,
+                PhoneNumber= user.PhoneNumber,
             };
         }
 
         public List<UserDto> GetUsers()
         {
-            throw new NotImplementedException();
+            return _userRepository.GetUsers()
+                .OrderBy(u => u.CreatedAt)
+                .Select(u => new UserDto
+                {
+                    Id = u.Id,
+                    Firstname= u.FirstName,
+                    Lastname= u.LastName,
+                    Email = u.Email,
+                    PhoneNumber = u.PhoneNumber
+                })
+                .ToList();
         }
 
         public UserDto? UpdateUser(Guid id, UpdateUserDto updateUserDto)
@@ -88,7 +102,9 @@ namespace TwitterClone.Application.Services
 
             user.FirstName = updateUserDto.Firstname;
             user.LastName = updateUserDto.Lastname;
-
+            user.Email = updateUserDto.Email ?? user.Email;
+            user.PhoneNumber = updateUserDto.PhoneNumber ?? user.PhoneNumber;
+            
             _userRepository.UpdateUser(user);
 
             return new UserDto
@@ -97,7 +113,31 @@ namespace TwitterClone.Application.Services
                 Firstname = user.FirstName,
                 Lastname = user.LastName,
                 Email = user.Email,
+                PhoneNumber = user.PhoneNumber
             };
+        }
+
+        public UserDto? UpdateUserPhoneNumber(Guid id, String  phoneNumber)
+        {
+            var user = _userRepository.GetUserById(id);
+
+            if(user  == null)
+            {
+                return null;
+            }
+
+            user.PhoneNumber = phoneNumber;
+            _userRepository.UpdateUser(user);
+
+            return new UserDto
+            {
+                Id = user.Id,
+                Firstname = user.FirstName,
+                Lastname = user.LastName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber
+            };
+
         }
     }
 }

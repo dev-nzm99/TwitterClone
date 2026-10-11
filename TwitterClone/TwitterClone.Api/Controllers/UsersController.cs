@@ -7,7 +7,7 @@ namespace TwitterClone.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    [Authorize]
+    //[Authorize]
     public class UsersController : ControllerBase
     {
 
@@ -24,7 +24,7 @@ namespace TwitterClone.Api.Controllers
             return Ok(_userService.GetUsers());
         }
 
-
+        //POST /api/users/
         [HttpPost]
         [AllowAnonymous]
         public IActionResult CreateUsers([FromBody] CreateUserDto createUserDto)
@@ -72,9 +72,15 @@ namespace TwitterClone.Api.Controllers
         [HttpPatch("{id}/phoneNumber")]
         public IActionResult UpdateUserPhoneNumber([FromRoute] Guid id, [FromBody] string phoneNumber)
         {
-            return Ok("Hello");
-        }
+            var user = _userService.UpdateUserPhoneNumber(id, phoneNumber);
 
+            if(user == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(user);
+        }
 
         //DELETE api/users/{id}
         [HttpDelete("{id}")]

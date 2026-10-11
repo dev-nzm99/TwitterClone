@@ -8,6 +8,7 @@ namespace TwitterClone.Application.Interfaces
         List<UserDto> GetUsers();
         UserDto GetUserById(Guid id);
         UserDto? UpdateUser(Guid id, UpdateUserDto updateUserDto);
+        UserDto? UpdateUserPhoneNumber(Guid id, String phoneNumber);
         bool DeleteUser(Guid id);
     }
 }

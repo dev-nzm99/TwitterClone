@@ -16,8 +16,8 @@ namespace TwitterClone.Infrastructure.Data
         public User UpdateUser(User user) 
         { 
            _users.RemoveAll(u => u.Id == user.Id);
-            _users.Add(user);
-            return user;
+           _users.Add(user);
+           return user;
         }
 
         public bool DeleteUser(User user) 
