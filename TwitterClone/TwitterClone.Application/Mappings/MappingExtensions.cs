@@ -1,4 +1,6 @@
-﻿using TwitterClone.Application.DTOs;
+﻿
+using System.Runtime.CompilerServices;
+using TwitterClone.Application.DTOs;
 using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Application.Mappings
@@ -14,6 +16,18 @@ namespace TwitterClone.Application.Mappings
                 Lastname = user.LastName,
                 Email = user.Email,
                 PhoneNumber = user.PhoneNumber,
+            };
+        }
+
+        public static TweetDto ToDto(this Tweet tweet)
+        {
+            return new TweetDto
+            {
+                Id = tweet.Id,
+                UserId = tweet.UserId,
+                Content = tweet.Content,
+                CreateAt = tweet.CreatedAt,
+                ModifiedAt = tweet.ModifiedAt,
             };
         }
     }

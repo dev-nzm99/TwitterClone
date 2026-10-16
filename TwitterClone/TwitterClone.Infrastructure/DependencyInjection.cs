@@ -9,6 +9,8 @@ namespace TwitterClone.Infrastructure
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
             services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<ITweetRepository, TweetRepository>();
+
             return services;
         }
     }

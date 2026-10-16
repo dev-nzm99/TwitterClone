@@ -3,9 +3,11 @@ using TwitterClone.Domain.Entities;
 
 namespace TwitterClone.Infrastructure.Data
 {
-    public class UserRepository:IUserRepository
+    public class UserRepository : IUserRepository
     {
         private List<User> _users = new List<User>();
+
+        public UserRepository() { }
 
         public User AddUser(User user)
         {

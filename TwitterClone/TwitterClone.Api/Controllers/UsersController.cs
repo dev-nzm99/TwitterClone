@@ -7,7 +7,7 @@ namespace TwitterClone.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class UsersController : ControllerBase
     {
 
@@ -17,8 +17,10 @@ namespace TwitterClone.Api.Controllers
            _userService = userService;
         }
 
+
         [HttpGet]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(List<UserDto>), StatusCodes.Status200OK)]
         public IActionResult GetUsers()
         {
             return Ok(_userService.GetUsers());
@@ -27,6 +29,9 @@ namespace TwitterClone.Api.Controllers
         //POST /api/users/
         [HttpPost]
         [AllowAnonymous]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status409Conflict)]
         public IActionResult CreateUsers([FromBody] CreateUserDto createUserDto)
         {
             var createdUser = _userService.CreateUser(createUserDto);
@@ -41,6 +46,8 @@ namespace TwitterClone.Api.Controllers
 
         //GET api/users/{id}
         [HttpGet("{id}")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult GetUserById([FromRoute] Guid id)
         {
             var user = _userService.GetUserById(id);
@@ -56,6 +63,9 @@ namespace TwitterClone.Api.Controllers
 
         //PUT api/users/{id}
         [HttpPut("{id}")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpadateUser([FromRoute] Guid id, [FromBody] UpdateUserDto updateUserDto)
         {
             var user = _userService.UpdateUser(id, updateUserDto);
@@ -70,6 +80,9 @@ namespace TwitterClone.Api.Controllers
 
         //PATCH api/users/{id}/phoneNumber
         [HttpPatch("{id}/phoneNumber")]
+        [ProducesResponseType(typeof(UserDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         public IActionResult UpdateUserPhoneNumber([FromRoute] Guid id, [FromBody] string phoneNumber)
         {
             var user = _userService.UpdateUserPhoneNumber(id, phoneNumber);
@@ -84,6 +97,8 @@ namespace TwitterClone.Api.Controllers
 
         //DELETE api/users/{id}
         [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         public IActionResult DeleteUser(Guid id) {
             
             var isDeleted = _userService.DeleteUser(id);
@@ -93,7 +108,7 @@ namespace TwitterClone.Api.Controllers
                 return NotFound();
             }
 
-            return Ok(isDeleted);
+            return NoContent();
         }
     }
 }
