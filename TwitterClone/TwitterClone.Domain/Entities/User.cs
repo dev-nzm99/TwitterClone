@@ -6,6 +6,7 @@ namespace TwitterClone.Domain.Entities
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
+        public string? PhoneNumber { get; set; }
         
         private List<Guid> _followers = new List<Guid>();
         private List<Guid> _incomingNotifications = new List<Guid>();
@@ -42,6 +43,11 @@ namespace TwitterClone.Domain.Entities
         {
             var baseRecord = base.DescribeRecord();
             return $"{baseRecord}, FirstName: {FirstName}, LastName: {LastName}, Email: {Email}";
+        }
+
+        public object ToDto()
+        {
+            throw new NotImplementedException();
         }
     }
 }

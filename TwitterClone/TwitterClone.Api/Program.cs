@@ -1,4 +1,5 @@
-using TwitterClone.Api.Data;
+using TwitterClone.Application;
+using TwitterClone.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,8 +10,10 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-//repository registration
-builder.Services.AddSingleton<UserRepository>();
+
+//Clean archetecture layer,each layer register is's own services
+builder.Services.AddApplication();
+builder.Services.AddInfrastructure();
 
 
 var app = builder.Build();
